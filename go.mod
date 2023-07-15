@@ -1,4 +1,4 @@
-module awesome
+module github.com/verrol/go-fiber-demo
 
 go 1.20
 

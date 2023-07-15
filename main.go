@@ -15,6 +15,7 @@ func main() {
 		log.Info("failed to start server", "error", err)
 	}
 }
+
 func hello(c *fiber.Ctx) error {
 	return c.SendString("Hello World!")
 }
