@@ -16,5 +16,5 @@ func main() {
 	}
 }
 func hello(c *fiber.Ctx) error {
-	return c.SendString("Hello World")
+	return c.SendString("Hello World!")
 }

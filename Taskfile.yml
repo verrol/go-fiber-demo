@@ -1,13 +1,18 @@
 version: '3'
 
-interval: 500ms
+interval: 5s
 
 tasks:
-  build:
+  dev:
     sources:
       - go.mod
       - main.go
-      - Dockerfile
+    cmds:
+      - killall -9 app || true
+      - go mod tidy
+      - go build -o app && ./app
+
+  build:
     cmds:
       - docker compose build
 
