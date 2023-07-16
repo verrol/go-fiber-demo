@@ -7,13 +7,16 @@ import (
 
 func main() {
 	app := fiber.New()
-	app.Use(logMiddleware)
-	app.Get("/", hello)
+	
+	// register middleware
+	app.Use("/", logMiddleware)  // log all requests
+	app.Use("/api", addHeaderMiddleware) // add a custom header for /api/* requests
 
-	app.Use(addHeaderMiddleware)
+	// register routes
+	app.Get("/", hello)
 	app.Get("/api", anApi)
 
-
+	// start server
 	log.Info("starting server", "port", 8080)
 	err := app.Listen(":8080")
 	if err != nil {
