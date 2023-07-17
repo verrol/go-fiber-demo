@@ -3,14 +3,15 @@ package main
 import (
 	"github.com/charmbracelet/log"
 	"github.com/gofiber/fiber/v2"
+	"github.com/verrol/go-fiber-demo/middleware"
 )
 
 func main() {
 	app := fiber.New()
-	
+
 	// register middleware
-	app.Use("/", logMiddleware)  // log all requests
-	app.Use("/api", addHeaderMiddleware) // add a custom header for /api/* requests
+	app.Use("/", middleware.NewLoggingMiddleWare().Next)      // log all requests
+	app.Use("/api", middleware.NewAddheaderMiddleWare().Next) // add a custom header for /api/* requests
 
 	// register routes
 	app.Get("/", hello)
@@ -22,18 +23,6 @@ func main() {
 	if err != nil {
 		log.Info("failed to start server", "error", err)
 	}
-}
-
-// logMiddleware is a simple logging middleware
-func logMiddleware(c *fiber.Ctx) error {
-	log.Info("my middleware called", "path", c.Path(),  "method", c.Method())
-	return c.Next()
-}
-
-// addHeaderMiddleware adds a header to the response
-func addHeaderMiddleware(c *fiber.Ctx) error {
-	c.Set("X-Header", "Custom header")
-	return c.Next()
 }
 
 func hello(c *fiber.Ctx) error {
