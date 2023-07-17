@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/charmbracelet/log"
 	"github.com/gofiber/fiber/v2"
-	"github.com/verrol/go-fiber-demo/middleware"
+	"github.com/verrol/go-fiber-demo/internal/middleware"
 )
 
 func main() {
