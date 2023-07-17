@@ -6,7 +6,7 @@ tasks:
   dev:
     sources:
       - go.mod
-      - main.go
+      - ./**/*.go
     cmds:
       - killall -9 app || true
       - go mod tidy
