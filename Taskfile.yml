@@ -8,9 +8,11 @@ tasks:
       - go.mod
       - ./**/*.go
     cmds:
-      - killall -9 app || true
       - go mod tidy
       - go build -o app && ./app
+      - defer: { task: cleanup }
+
+  cleanup: killall -9 app || true
 
   build:
     cmds:
